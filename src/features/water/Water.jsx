@@ -9,12 +9,11 @@ export function Water() {
 	const dispatch = useDispatch();
 	const logs = useSelector((state) => state.water.logs);
 	const [waterAmount, setWaterAmount] = useState(" ");
-	const [unit, setUnit] = useState("Oz");
+	const [unit, setUnit] = useState("fl-oz");
 
 	function handleWaterAdd() {
 		setWaterAmount("");
 		dispatch(ADD_LOG({ amount: waterAmount, unit: unit }));
-		console.log(logs);
 	}
 	return (
 		<div>
@@ -37,7 +36,7 @@ export function Water() {
 			<h2>Water Logs</h2>
 			<ul>
 				{logs.map((log) => (
-					<li key={log.id}>{`${Number(log.waterAmount)} ${log.unit}`}</li>
+					<li key={log.id}>{`${log.waterAmount} ${log.unit}`}</li>
 				))}
 			</ul>
 		</div>

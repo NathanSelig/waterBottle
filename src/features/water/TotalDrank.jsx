@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { VolumeUnit, convertUnits } from "measurement-unit-converter";
-
-const NAMES = {
-	Oz: VolumeUnit.FLUID_OUNCE_US,
-	ml: VolumeUnit.MILLILITER,
-	l: VolumeUnit.LITER,
-};
+import { volume } from "units-converter";
 
 export default function TotalDrank({ logs, unit }) {
 	const [total, setTotal] = useState(0);
@@ -13,9 +7,7 @@ export default function TotalDrank({ logs, unit }) {
 	useEffect(() => {
 		let calculatedTotal = 0;
 		logs.forEach((log) => {
-			const currentUnit = NAMES[log.unit];
-			const newUnit = NAMES[unit];
-			const convertedAmount = convertUnits(log.amount, NAMES[currentUnit], NAMES[newUnit]);
+			const convertedAmount = volume(Number(log.waterAmount)).from(log.unit).to(unit).value;
 			calculatedTotal += convertedAmount;
 		});
 		setTotal(calculatedTotal);
@@ -25,7 +17,7 @@ export default function TotalDrank({ logs, unit }) {
 		<div>
 			<h2>Total drank</h2>
 			<p>
-				{total} {unit}
+				{total.toFixed(1)} {unit}
 			</p>
 		</div>
 	);

@@ -10,7 +10,7 @@ export default function Unit({unit , setUnit}) {
 			<select
 				value={unit}
 				onChange={handleSelect}>
-				<option value='Oz'>Oz</option>
+				<option value='fl-oz'>fl-oz</option>
 				<option value='ml'>ml</option>
                 <option value='l'>l</option>
 			</select>
